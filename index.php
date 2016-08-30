@@ -1,6 +1,6 @@
 <?php
-define('API_KEY', 'Your Token');
-$admin = '68747297';
+define('API_KEY', '261599413:AAEMl36S0nVkf8qyKJHi1hpAfg_qRoNbVtQ');
+$admin = '155940345';
 function api($method,$datas=[]){
     $url = "https://api.telegram.org/bot".API_KEY."/".$method;
     $ch = curl_init();
@@ -14,7 +14,7 @@ function api($method,$datas=[]){
         return json_decode($res);
     }
 }
-/*function apipwd($method,$datas=[]){
+function apipwd($method,$datas=[]){
     $url = "https://api.pwrtelegram.xyz/bot".API_KEY."/".$method;
     $ch = curl_init();
     curl_setopt($ch,CURLOPT_URL,$url);
@@ -26,7 +26,7 @@ function api($method,$datas=[]){
     }else{
         return json_decode($res);
     }
-}*/
+}
 function req($url){
   $res = file_get_contents($url);
   return json_decode($res);
@@ -59,7 +59,7 @@ if($u['message']['text'] and $banlist->num_rows == 0){
   $msg = $u['message']['message_id'];
   $text = $u['message']['text'];
   $chat_id = $u['message']['chat']['id'];
-  if($text == '/start' or $text == '/help' or $text == '/help@Arrow_robot'){
+  if($text == '/start' or $text == '/help' or $text == '/help@mfun_bot'){
     $check = $db->query('SELECT id FROM member WHERE id='.$chat_id);
     if($check->num_rows == 0){
       $db->query('INSERT INTO member (id) VALUES ('.$chat_id.')');
@@ -67,7 +67,7 @@ if($u['message']['text'] and $banlist->num_rows == 0){
     api('sendMessage',array(
       'chat_id'=>$chat_id,
       'text'=>"
-Hello I'm Arrow
+Hello I'm MfunBot
 
 Commands :
 
@@ -88,8 +88,8 @@ Commands :
       'reply_markup'=>json_encode(array(
         'inline_keyboard'=>array(
           array(
-            array('text'=>'Creator','url'=>'https://telegram.me/negative'),
-            array('text'=>'Channel','url'=>'https://telegram.me/taylor_team')
+            array('text'=>'Creator','url'=>'https://telegram.me/sudo2'),
+            array('text'=>'Channel','url'=>'https://telegram.me/Mehdi_Smoke')
           ),
           array(
             array('text'=>'فارسی 🇮🇷','callback_data'=>'fa')
@@ -323,14 +323,14 @@ Commands :
       ));
     }
   }
-  /*if($u['message']['new_chat_member']){
+  if($u['message']['new_chat_member']){
     if($u['message']['from']['id'] != 68747297){
       $idc = $u['message']['chat']['id'];
       api('leaveChat',array(
         'chat_id'=>$idc
       ));
     }
-  }*/
+  }
 }elseif($banlist->num_rows != 0){
   api('sendMessage',array(
     'chat_id'=>$u['message']['chat']['id'],
@@ -347,7 +347,7 @@ if($u['callback_query']){
       'chat_id'=>$chat_id,
       'message_id'=>$msg,
       'text'=>"
-سلام من ارو هستم
+سلام من فان بات مهدی هستم
 
 دستورات :
 
@@ -378,7 +378,7 @@ if($u['callback_query']){
       'chat_id'=>$chat_id,
       'message_id'=>$msg,
       'text'=>"
-Hello I'm Arrow
+Hello I'm MfunBot
 
 Commands :
 
@@ -399,8 +399,8 @@ Commands :
       'reply_markup'=>json_encode(array(
         'inline_keyboard'=>array(
           array(
-            array('text'=>'Creator','url'=>'https://telegram.me/negative'),
-            array('text'=>'Channel','url'=>'https://telegram.me/taylor_team')
+            array('text'=>'Creator','url'=>'https://telegram.me/sudo2'),
+            array('text'=>'Channel','url'=>'https://telegram.me/Mehdi_Smoke')
           ),
           array(
             array('text'=>"فارسی 🇮🇷",'callback_data'=>'fa')
@@ -440,7 +440,7 @@ if($u['inline_query']){
       ))
     ));
 
-  }/*elseif(preg_match('/^(sticker) (.*)/',$query)){
+  }elseif(preg_match('/^(sticker) (.*)/',$query)){
     preg_match('/^(sticker) (.*)/',$query,$match);
     $txt = urlencode($match[2]);
     file_put_contents('sticker.png',file_get_contents('http://api.img4me.com/?text='.$txt.'&font=arial&fcolor=000000&size=30&bcolor=FFFFFF&type=png'));
@@ -460,6 +460,6 @@ if($u['inline_query']){
         )
       ))
     ));
-  }*/
+  }
 }
 $db->close();
