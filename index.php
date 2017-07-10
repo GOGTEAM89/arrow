@@ -347,7 +347,7 @@ if($u['callback_query']){
       'chat_id'=>$chat_id,
       'message_id'=>$msg,
       'text'=>"
-سلام من فان بات مهدی هستم
+سلام من فان بات هیدن هستم
 
 دستورات :
 
